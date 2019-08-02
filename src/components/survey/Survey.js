@@ -12,7 +12,7 @@ class Survey extends Component {
   }
 
   async componentDidMount() {
-    const schema = (await axios.get('http://localhost:8000/api/v1/surveys/10/')).data.questions;
+    const schema = (await axios.get('/api/v1/surveys/10/')).data.questions;
     this.setState({
       schema,
     });

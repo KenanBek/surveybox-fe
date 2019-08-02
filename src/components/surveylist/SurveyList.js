@@ -12,7 +12,7 @@ class SurveyList extends Component {
   }
 
   async componentDidMount() {
-    const surveys = (await axios.get('http://localhost:8000/api/v1/surveys/')).data.results;
+    const surveys = (await axios.get('/api/v1/surveys/')).data.results;
     this.setState({
       surveys,
     });
