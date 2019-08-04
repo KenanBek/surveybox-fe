@@ -1,0 +1,22 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: surveybox-fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: surveybox-fe
+  template:
+    metadata:
+      labels:
+        app: surveybox-fe
+    spec:
+      containers:
+      - name: surveybox-fe
+        image: kananrahimovcontainers.azurecr.io/surveybox-fe:latest
+        ports:
+        - containerPort: 80
+        env:
+          - name: REACT_APP_BE_URL
+            value: http://surveybox-be.northeurope.cloudapp.azure.com

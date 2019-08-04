@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import axios from 'axios';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import App from './components/app/App';
 import * as serviceWorker from './serviceWorker';
+
+axios.defaults.baseURL = process.env.REACT_APP_BE_URL;
 
 ReactDOM.render(
   <BrowserRouter>
