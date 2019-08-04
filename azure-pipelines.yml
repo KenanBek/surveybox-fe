@@ -1,0 +1,28 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '12.x'
+  displayName: 'Install Node'
+
+- script: |
+    npm install
+    CI=true npm run build
+    # CI=true npm run test -- --coverage
+  displayName: 'NPM Install, Build, Test with Coverage'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'KananRahimovContainers'
+    repository: 'surveybox-fe'
+    command: 'buildAndPush'
+    Dockerfile: './Dockerfile'
+    tags: |
+      latest
+      $(Build.BuildId)
+  displayName: 'Build and Push Docker Image'

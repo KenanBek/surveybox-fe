@@ -24,16 +24,19 @@ class Survey extends Component {
 
     if (schema != null) {
       return (
-        <Form
-          schema={schema}
-          onChange={log('changed')}
-          onSubmit={log('submitted')}
-          onError={log('errors')}
-        />
+        <div>
+          <p>{process.env.REACT_APP_BE_URL}</p>
+          <Form
+            schema={schema}
+            onChange={log('changed')}
+            onSubmit={log('submitted')}
+            onError={log('errors')}
+          />
+        </div>
       );
     }
     return (
-      <p>Loading..,</p>
+      <p>Loading...</p>
     );
   }
 }
