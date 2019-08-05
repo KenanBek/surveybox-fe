@@ -34,7 +34,7 @@ class SurveyList extends Component {
             surveys && surveys.map(survey => (
               <div key={survey.id} className="col-sm-12 col-md-4 col-lg-3">
                 <Link to={`/survey/${survey.id}`}>
-                  <div className="card text-white bg-success mb-3">
+                  <div className="card text-white bg-primary mb-3">
                     <div className="card-header">
                       Answers:
                       {survey.answers}

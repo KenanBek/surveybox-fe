@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import Form from 'react-jsonschema-form';
 
@@ -12,7 +13,8 @@ class Survey extends Component {
   }
 
   async componentDidMount() {
-    const schema = (await axios.get('/api/v1/surveys/10/')).data.questions;
+    const { match: { params: { id } } } = this.props;
+    const schema = (await axios.get(`/api/v1/surveys/${id}/`)).data.questions;
     this.setState({
       schema,
     });
@@ -24,13 +26,17 @@ class Survey extends Component {
 
     if (schema != null) {
       return (
-        <div>
-          <Form
-            schema={schema}
-            onChange={log('changed')}
-            onSubmit={log('submitted')}
-            onError={log('errors')}
-          />
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12 col-md-4 col-lg-3">
+              <Form
+                schema={schema}
+                onChange={log('changed')}
+                onSubmit={log('submitted')}
+                onError={log('errors')}
+              />
+            </div>
+          </div>
         </div>
       );
     }
@@ -39,5 +45,13 @@ class Survey extends Component {
     );
   }
 }
+
+Survey.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  }).isRequired,
+};
 
 export default Survey;
