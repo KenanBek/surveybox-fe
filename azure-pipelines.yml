@@ -10,11 +10,16 @@ steps:
     versionSpec: '12.x'
   displayName: 'Install Node'
 
+- script: npm install
+  displayName: 'Install dependencies'
+
 - script: |
-    npm install
-    CI=true npm run build
-    # CI=true npm run test -- --coverage
-  displayName: 'NPM Install, Build, Test with Coverage'
+    npm run lint
+    CI=true npm run test -- --coverage
+  displayName: 'Lint and Test with Coverage'
+
+- script: CI=true npm run build
+  displayName: 'Build'
 
 - task: Docker@2
   inputs:
