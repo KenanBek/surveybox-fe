@@ -13,6 +13,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 axios.defaults.baseURL = process.env.REACT_APP_BE_URL;
+axios.defaults.timeout = 10 * 1000; // 10 seconds
 const store = storeFactory();
 
 window.store = store;

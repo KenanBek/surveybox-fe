@@ -34,7 +34,7 @@ class PreviewSurvey extends React.Component {
       );
     } else if (typeof answers === 'object') {
       previewAnswers = Object.keys(answers).map(key => (
-        <dl>
+        <dl key={key}>
           <dt>{key}</dt>
           <dd>{answers[key]}</dd>
         </dl>
