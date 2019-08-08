@@ -15,6 +15,11 @@ class List extends Component {
   render() {
     const { surveysList } = this.props;
 
+    if (!surveysList.length) {
+      return (
+        <div>no surveys</div>
+      );
+    }
     return (
       <div>
         <SurveyList surveysList={surveysList} />

@@ -24,7 +24,7 @@ class EditSurvey extends React.Component {
     const { showPreview } = this.state;
 
     if (showPreview) {
-      return <Redirect to="/" />;
+      return <Redirect to="/preview" />;
     }
 
     return (
@@ -40,7 +40,7 @@ class EditSurvey extends React.Component {
       </div>
     );
   }
-};
+}
 
 EditSurvey.propTypes = {
   survey: PropTypes.objectOf(PropTypes.any),

@@ -3,6 +3,7 @@ import C from './constants';
 
 export const fetchSurveyList = () => async (dispatch) => {
   const response = await axios.get('/api/v1/surveys/');
+
   dispatch({
     type: C.FETCH_SURVEY_LIST,
     payload: {
@@ -13,6 +14,7 @@ export const fetchSurveyList = () => async (dispatch) => {
 
 export const fetchSurveyItem = id => async (dispatch) => {
   const response = await axios.get(`/api/v1/surveys/${id}/?format=json`);
+
   dispatch({
     type: C.FETCH_SURVEY_ITEM,
     payload: {
@@ -36,13 +38,32 @@ export const previewSurvey = (survey, answers) => (dispatch) => {
   });
 };
 
-export const submitSurvey = survey => (dispatch) => {
-  dispatch({
-    type: C.SUBMIT_SURVEY,
-    payload: {
-      survey,
-    },
-  });
+export const submitSurvey = (survey, answers) => async (dispatch) => {
+  try {
+    const data = {
+      survey: survey.id,
+      results: answers,
+    };
+    await axios.post('/api/v1/answers/', data);
+
+    dispatch({
+      type: C.SUBMIT_SURVEY,
+      payload: {
+        survey,
+        answers,
+      },
+    });
+  } catch (error) {
+    dispatch({
+      type: C.ADD_ERROR,
+      payload: error,
+    });
+  }
 };
+
+export const clearError = index => ({
+  type: C.CLEAR_ERROR,
+  payload: index,
+});
 
 export default undefined;
