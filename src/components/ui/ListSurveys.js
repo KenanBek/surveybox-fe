@@ -10,8 +10,8 @@ const ListSurveys = ({ surveys }) => (
           <Link to={`/survey/${survey.id}`}>
             <div className="card text-white bg-primary mb-3">
               <div className="card-header">
-                    Answers:
-                {survey.answers}
+                Submits:
+                {survey.answers_count}
               </div>
               <div className="card-body">
                 <h4 className="card-title">{survey.title}</h4>
