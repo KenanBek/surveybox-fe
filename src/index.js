@@ -1,18 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
+
+import * as serviceWorker from './serviceWorker';
+import App from './components/app/App';
+import storeFactory from './store';
+
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import App from './components/app/App';
-import * as serviceWorker from './serviceWorker';
 
 axios.defaults.baseURL = process.env.REACT_APP_BE_URL;
+const store = storeFactory();
+
+window.store = store;
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root'),
 );
 
