@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 
 import SurveyList from '../surveylist/SurveyList';
-import { fetchAllSurveys } from '../../actions';
+import { fetchSurveyList } from '../../actions';
 
 class List extends Component {
   componentDidMount() {
@@ -28,7 +28,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadSurveys: () => dispatch(fetchAllSurveys()),
+  loadSurveys: () => dispatch(fetchSurveyList()),
 });
 
 List.propTypes = {
@@ -39,4 +39,5 @@ List.defaultProps = {
   surveysList: [],
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(List));
+const connector = connect(mapStateToProps, mapDispatchToProps)(List);
+export default withRouter(connector);

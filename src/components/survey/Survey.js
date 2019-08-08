@@ -15,6 +15,9 @@ class Survey extends Component {
   async componentDidMount() {
     const { match: { params: { id } } } = this.props;
     const schema = (await axios.get(`/api/v1/surveys/${id}/`)).data.questions;
+
+    window.schema = schema;
+
     this.setState({
       schema,
     });

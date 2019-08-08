@@ -1,18 +1,55 @@
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
 
-import Survey from '../survey/Survey';
-import submitSurvey from '../../actions';
+import EditSurvey from '../ui/EditSurvey';
+import { fetchSurveyItem, previewSurvey } from '../../actions';
 
-const mapStateToProps = (state, props) => ({
-  surveysList: state.surveys.surveysList,
+class Form extends Component {
+  componentDidMount() {
+    const { getSurvey } = this.props;
+    getSurvey();
+  }
+
+  render() {
+    const { survey, questions } = this.props;
+    const { onPreview } = this.props;
+
+    return (
+      <div>
+        <EditSurvey survey={survey} questions={questions} onPreview={onPreview} />
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  survey: state.surveys.survey,
+  questions: state.surveys.questions,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onSubmit: (formData) => {
-    dispatch(submitSurvey(formData));
+const mapDispatchToProps = (dispatch, props) => ({
+  getSurvey: () => {
+    dispatch(fetchSurveyItem(props.match.params.id));
+  },
+  onPreview: (survey, answers) => {
+    dispatch(previewSurvey(survey, answers));
   },
 });
 
-const List = connect(mapStateToProps, mapDispatchToProps)(Survey);
-export default withRouter(List);
+Form.propTypes = {
+  survey: PropTypes.objectOf(PropTypes.any),
+  questions: PropTypes.objectOf(PropTypes.any),
+  getSurvey: PropTypes.func,
+  onPreview: PropTypes.func,
+};
+Form.defaultProps = {
+  survey: {},
+  questions: {},
+  getSurvey: f => f,
+  onPreview: f => f,
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps)(Form);
+export default withRouter(connector);

@@ -1,12 +1,11 @@
 import { combineReducers } from 'redux';
 import C from '../constants';
 
-
 export const surveys = (state = [], action) => {
   switch (action.type) {
-  case C.FETCH_SURVEY:
+  case C.FETCH_SURVEY_LIST:
     return action.payload;
-  case C.EDIT_SURVEY:
+  case C.FETCH_SURVEY_ITEM:
     return action.payload;
   case C.PREVIEW_SURVEY:
     return action.payload;
@@ -16,7 +15,6 @@ export const surveys = (state = [], action) => {
     return state;
   }
 };
-
 
 export const errors = (state = [], action) => {
   switch (action.type) {
@@ -31,7 +29,6 @@ export const errors = (state = [], action) => {
     return state;
   }
 };
-
 
 export default combineReducers({
   surveys,
