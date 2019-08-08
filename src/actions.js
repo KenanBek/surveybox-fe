@@ -56,20 +56,14 @@ export const previewSurvey = (survey, answers) => (dispatch) => {
   });
 };
 
-export const submitSurvey = (survey, answers) => (dispatch) => {
+export const submitSurvey = (survey, answers) => () => {
   const data = {
     survey: survey.id,
     results: answers,
   };
   axios.post('/api/v1/answers/', data)
     .then(() => {
-      dispatch({
-        type: C.SUBMIT_SURVEY,
-        payload: {
-          survey,
-          answers,
-        },
-      });
+      fetchSurveyList();
     })
     .catch((error) => {
       addError(error);
