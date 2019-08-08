@@ -10,7 +10,9 @@ export const surveys = (state = [], action) => {
   case C.PREVIEW_SURVEY:
     return action.payload;
   case C.SUBMIT_SURVEY:
-    return action.payload;
+    return {
+      surveys: [...state.surveys, action.payload.survey],
+    };
   default:
     return state;
   }

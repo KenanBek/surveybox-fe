@@ -18,7 +18,11 @@ class Form extends Component {
 
     return (
       <div>
-        <EditSurvey survey={survey} questions={questions} onPreview={onPreview} />
+        { questions ? (
+          <EditSurvey survey={survey} questions={questions} onPreview={onPreview} />
+        ) : (
+          <p>Loading survey data...</p>
+        )}
       </div>
     );
   }
@@ -46,7 +50,7 @@ Form.propTypes = {
 };
 Form.defaultProps = {
   survey: {},
-  questions: {},
+  questions: undefined,
   getSurvey: f => f,
   onPreview: f => f,
 };

@@ -17,7 +17,7 @@ class List extends Component {
 
     if (!surveys.length) {
       return (
-        <div>no surveys (from List)</div>
+        <div>Loading...</div>
       );
     }
     return (
