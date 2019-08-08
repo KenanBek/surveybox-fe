@@ -8,10 +8,15 @@ export const surveys = (state = [], action) => {
   case C.FETCH_SURVEY_ITEM:
     return action.payload;
   case C.PREVIEW_SURVEY:
-    return action.payload;
+    return {
+      ...state,
+      survey: action.payload.survey,
+      answers: action.payload.answers,
+    };
   case C.SUBMIT_SURVEY:
     return {
-      surveys: [...state.surveys, action.payload.survey],
+      ...state,
+      survey: action.payload.survey,
     };
   default:
     return state;

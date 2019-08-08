@@ -71,6 +71,7 @@ export const submitSurvey = (survey, answers) => (dispatch) => {
             description: response.data.description,
             answers_count: response.data.answers_count,
           },
+          answers,
         },
       });
     })
