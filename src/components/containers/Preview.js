@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
@@ -7,28 +7,17 @@ import { Redirect } from 'react-router-dom';
 import PreviewSurvey from '../ui/PreviewSurvey';
 import { submitSurvey } from '../../actions';
 
-class Preview extends Component {
-  componentDidMount() {
-    console.log('consider converting to pure function');
-  }
-
-  render() {
-    const { survey, answers } = this.props;
-    const { onSubmit } = this.props;
-
-    return (
+const Preview = ({ survey, answers, onSubmit = f => f }) => (
+  <div>
+    {!survey ? (
+      <Redirect to="/" />
+    ) : (
       <div>
-        {!survey ? (
-          <Redirect to="/" />
-        ) : (
-          <div>
-            <PreviewSurvey survey={survey} answers={answers} onSubmit={onSubmit} />
-          </div>
-        )}
+        <PreviewSurvey survey={survey} answers={answers} onSubmit={onSubmit} />
       </div>
-    );
-  }
-}
+    )}
+  </div>
+);
 
 const mapStateToProps = state => ({
   survey: state.surveys.survey,
@@ -43,7 +32,10 @@ const mapDispatchToProps = dispatch => ({
 
 Preview.propTypes = {
   survey: PropTypes.objectOf(PropTypes.any),
-  answers: PropTypes.objectOf(PropTypes.any),
+  answers: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
   onSubmit: PropTypes.func,
 };
 Preview.defaultProps = {

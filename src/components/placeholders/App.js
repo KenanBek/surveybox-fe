@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import Navigation from '../navigation/Navigation';
-import Main from '../main/Main';
-import Errors from '../Errors';
+import Navigation from './Navigation';
+import Main from './Main';
+import Errors from '../containers/Errors';
 
 function App() {
   return (

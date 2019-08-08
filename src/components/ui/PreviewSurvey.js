@@ -64,8 +64,11 @@ class PreviewSurvey extends React.Component {
 PreviewSurvey.propTypes = {
   survey: PropTypes.objectOf(PropTypes.any).isRequired,
   // we might have single field surveys which will end up
-  // as a string or number (not object or array)
-  answers: PropTypes.instanceOf(PropTypes.any).isRequired,
+  // as a string or number (not object)
+  answers: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 

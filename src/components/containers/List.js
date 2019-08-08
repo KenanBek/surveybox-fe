@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 
-import SurveyList from '../surveylist/SurveyList';
+import ListSurveys from '../ui/ListSurveys';
 import { fetchSurveyList } from '../../actions';
 
 class List extends Component {
@@ -13,23 +13,23 @@ class List extends Component {
   }
 
   render() {
-    const { surveysList } = this.props;
+    const { surveys } = this.props;
 
-    if (!surveysList.length) {
+    if (!surveys.length) {
       return (
-        <div>no surveys</div>
+        <div>no surveys (from List)</div>
       );
     }
     return (
       <div>
-        <SurveyList surveysList={surveysList} />
+        <ListSurveys surveys={surveys} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  surveysList: state.surveys.surveysList,
+  surveys: state.surveys.surveys,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -37,11 +37,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 List.propTypes = {
-  surveysList: PropTypes.arrayOf(PropTypes.object),
+  surveys: PropTypes.arrayOf(PropTypes.object),
   loadSurveys: PropTypes.func.isRequired,
 };
 List.defaultProps = {
-  surveysList: [],
+  surveys: [],
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps)(List);

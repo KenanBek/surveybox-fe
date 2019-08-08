@@ -7,13 +7,13 @@ export const fetchSurveyList = () => async (dispatch) => {
   dispatch({
     type: C.FETCH_SURVEY_LIST,
     payload: {
-      surveysList: response.data.results,
+      surveys: response.data.results,
     },
   });
 };
 
 export const fetchSurveyItem = id => async (dispatch) => {
-  const response = await axios.get(`/api/v1/surveys/${id}/?format=json`);
+  const response = await axios.get(`/api/v1/surveys/${id}/`);
 
   dispatch({
     type: C.FETCH_SURVEY_ITEM,

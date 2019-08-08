@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 
 import * as serviceWorker from './serviceWorker';
-import App from './components/app/App';
+import App from './components/placeholders/App';
 import storeFactory from './store';
 
 import './index.css';

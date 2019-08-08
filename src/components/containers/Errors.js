@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { clearError } from '../actions';
+import { clearError } from '../../actions';
 
 const Errors = ({ errors, onClearError = f => f }) => (
   <div className="container">

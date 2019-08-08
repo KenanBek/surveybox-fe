@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const SurveyList = ({ surveysList }) => (
+const ListSurveys = ({ surveys }) => (
   <div className="container">
     <div className="row">
-      {(surveysList && surveysList.length) ? surveysList.map(survey => (
+      {(surveys && surveys.length) ? surveys.map(survey => (
         <div key={survey.id} className="col-sm-12 col-md-4 col-lg-3">
           <Link to={`/survey/${survey.id}`}>
             <div className="card text-white bg-primary mb-3">
@@ -25,11 +25,11 @@ const SurveyList = ({ surveysList }) => (
   </div>
 );
 
-SurveyList.propTypes = {
-  surveysList: PropTypes.arrayOf(PropTypes.any),
+ListSurveys.propTypes = {
+  surveys: PropTypes.arrayOf(PropTypes.any),
 };
-SurveyList.defaultProps = {
-  surveysList: [],
+ListSurveys.defaultProps = {
+  surveys: [],
 };
 
-export default SurveyList;
+export default ListSurveys;
