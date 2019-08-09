@@ -7,10 +7,10 @@ const Errors = ({ errors, onClearError = f => f }) => (
   <div className="container">
     <div className="row">
       <div className="col-sm-12 col-md-4 col-lg-3">
-        {(errors && errors.length) ? errors.map((message, i) => (
+        {(errors && errors.length) ? errors.map((error, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <div key={i} className="error">
-            <p>{message}</p>
+            <p>{error.message}</p>
             <button type="button" onClick={() => onClearError(i)}>close</button>
           </div>
         )) : null}

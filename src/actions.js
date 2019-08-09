@@ -11,39 +11,36 @@ export const clearError = index => ({
   payload: index,
 });
 
-export const fetchSurveyList = () => (dispatch) => {
-  axios.get('/api/v1/surveys/')
-    .then((response) => {
-      dispatch({
-        type: C.FETCH_SURVEY_LIST,
-        payload: {
-          surveys: response.data.results,
-        },
-      });
-    })
-    .catch((error) => {
-      addError(error);
+export const fetchSurveyList = () => dispatch => axios.get('/api/v1/surveys/')
+  .then((response) => {
+    dispatch({
+      type: C.FETCH_SURVEY_LIST,
+      payload: {
+        surveys: response.data.results,
+      },
     });
-};
+  })
+  .catch((error) => {
+    dispatch(addError(error));
+  });
 
-export const fetchSurveyItem = id => (dispatch) => {
-  axios.get(`/api/v1/surveys/${id}/`)
-    .then((response) => {
-      dispatch({
-        type: C.FETCH_SURVEY_ITEM,
-        payload: {
-          survey: {
-            id: response.data.id,
-            title: response.data.title,
-            description: response.data.description,
-          },
-          questions: response.data.questions,
+export const fetchSurveyItem = id => async (dispatch) => {
+  try {
+    const response = await axios.get(`/api/v1/surveys/${id}/`);
+    dispatch({
+      type: C.FETCH_SURVEY_ITEM,
+      payload: {
+        survey: {
+          id: response.data.id,
+          title: response.data.title,
+          description: response.data.description,
         },
-      });
-    })
-    .catch((error) => {
-      addError(error);
+        questions: response.data.questions,
+      },
     });
+  } catch (error) {
+    dispatch(addError(error));
+  }
 };
 
 export const previewSurvey = (survey, answers) => (dispatch) => {
@@ -76,7 +73,7 @@ export const submitSurvey = (survey, answers) => (dispatch) => {
       });
     })
     .catch((error) => {
-      addError(error);
+      dispatch(addError(error));
     });
 };
 
