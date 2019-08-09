@@ -21,7 +21,7 @@ export const fetchSurveyList = () => dispatch => axios.get('/api/v1/surveys/')
     });
   })
   .catch((error) => {
-    dispatch(addError(error));
+    dispatch(addError(error.message));
   });
 
 export const fetchSurveyItem = id => async (dispatch) => {
@@ -39,7 +39,7 @@ export const fetchSurveyItem = id => async (dispatch) => {
       },
     });
   } catch (error) {
-    dispatch(addError(error));
+    dispatch(addError(error.message));
   }
 };
 
@@ -73,7 +73,7 @@ export const submitSurvey = (survey, answers) => (dispatch) => {
       });
     })
     .catch((error) => {
-      dispatch(addError(error));
+      dispatch(addError(error.message));
     });
 };
 

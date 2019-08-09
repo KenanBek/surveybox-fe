@@ -42,4 +42,20 @@ describe('async actions', () => {
         expect(actualActions).toEqual(expectedActions);
       });
   });
+
+  it('creates ADD_ERROR when there is 500 for fetching surveys', () => {
+    axiosMock.onGet('api/v1/surveys/').reply(500);
+
+    const store = mockStore({});
+    const expectedActions = [{
+      type: C.ADD_ERROR,
+      payload: 'connect ECONNREFUSED 127.0.0.1:80',
+    }];
+
+    return store.dispatch(actions.fetchSurveyList())
+      .then(() => {
+        const actualActions = store.getActions().map(action => action);
+        expect(actualActions).toEqual(expectedActions);
+      });
+  });
 });
